@@ -1,0 +1,44 @@
+\documentclass[12pt,letterpaper]{report}
+\usepackage{pgf, tikz}
+\usetikzlibrary{arrows, automata}
+
+\begin{document}
+
+    \begin{tikzpicture}[
+            > = stealth, % arrow head style
+            shorten > = 1pt, % don't touch arrow head to node
+            auto,
+            node distance = 3cm, % distance between nodes
+            semithick % line style
+        ]
+
+        \tikzstyle{every state}=[
+            draw = black,
+            thick,
+            fill = white,
+            minimum size = 4mm
+        ]
+
+        \node[state] (e) {$\frac{\partial e}{\partial e}=1$};
+        \node[rectangle,draw] (ec) [below left of=e]{$\frac{\partial e}{\partial c}=2$};
+        \node[rectangle,draw] (ed) [below right of=e]{$\frac{\partial e}{\partial d}=3$};
+        \node[state] (c) [below left of=ec]{$\frac{\partial e}{\partial c}=2$};
+        \node[state] (d) [below right of=ed]{$\frac{\partial e}{\partial d}=3$};
+        \node[rectangle,draw] (ca) [below left of=c]{$\frac{\partial c}{\partial a}=a$};
+        %\node[rectangle,draw] (tmp)[above of=s]{$tmp$};
+        %\node[state] (v1) [above right of=s] {$v_1$};
+        %\node[state] (v2) [right of=s] {$v_2$};
+        %\node[state] (v3) [below right of=s] {$v_2$};
+        %\node[state] (t) [right of=v2] {$t$};
+
+        %\path[->] (s) edge node {18} (v1);
+        %\path[->] (s) edge node {1} (v2);
+        %\path[->] (s) edge node {1} (v3);
+        %\path[->] (v2) edge node {2} (v1);
+        %\path[->] (v3) edge node {1} (v2);
+        %\path[->] (v1) edge node {20} (t);
+
+        %\draw[red, dashed] (1, 2) -- (1, -2);
+    \end{tikzpicture}
+
+\end{document}

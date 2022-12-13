@@ -1,0 +1,33 @@
+{
+   
+    "latex-workshop.latex.tools":[
+     {
+       "name": "pdflatex",
+       "command": "pdflatex",
+       "args": [
+        "-interaction=nonstopmode",
+        "-synctex=1",
+         "-output-directory=pdf",
+         "%DOCFILE%"
+       ]
+     }
+    ],
+    
+    
+     "latex-workshop.latex.recipes":[
+     
+       {
+         "name": "local",
+         "tools": [
+           "pdflatex"
+           ]
+         }
+      ],
+      "latex-workshop.latex.outDir": "pdf",
+      "terminal.explorerKind": "external",
+      "terminal.integrated.automationShell.windows": "",
+      "workbench.colorTheme": "Visual Studio 2019 Dark",
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "jupyter.sendSelectionToInteractiveWindow": false,
+    "workbench.editorAssociations": {}
+    }
