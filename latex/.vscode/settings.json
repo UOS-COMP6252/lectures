@@ -7,7 +7,7 @@
        "args": [
         "-interaction=nonstopmode",
         "-synctex=1",
-         "-output-directory=pdf",
+         "-output-directory=../pdf",
          "%DOCFILE%"
        ]
      }
@@ -23,7 +23,7 @@
            ]
          }
       ],
-      "latex-workshop.latex.outDir": "pdf",
+      "latex-workshop.latex.outDir": "../pdf",
       "terminal.explorerKind": "external",
       "terminal.integrated.automationShell.windows": "",
       "workbench.colorTheme": "Visual Studio 2019 Dark",
