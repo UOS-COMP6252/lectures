@@ -1,0 +1,74 @@
+\documentclass[12pt,letterpaper]{report}
+\usepackage{pgf, tikz}
+\usetikzlibrary{arrows, automata,shapes.geometric}
+
+\begin{document}
+\tikzset{elliptic state/.style={draw,ellipse}}
+    \begin{tikzpicture}[
+            > = stealth, % arrow head style
+            shorten > = 1pt, % don't touch arrow head to node
+            auto,
+            node distance = 3cm, % distance between nodes
+            semithick % line style
+        ]
+
+        \tikzstyle{every state}=[
+            draw = black,
+            thick,
+            fill = white,
+            minimum size = 15mm
+        ]
+
+        \node[state] (e) {$\frac{\partial e}{\partial e}=1$};
+        %\node[align=center,anchor=south] (elabel) at (e.south) {$\frac{\partial e}{\partial e}$};
+
+        \node[rectangle,draw] (ec) [below left of=e]{$\frac{\partial e}{\partial c}=2$};
+        \node[rectangle,draw] (ed) [below right of=e]{$\frac{\partial e}{\partial d}=6$};
+        
+        \node[state] (c) [below left of=ec]{$\frac{\partial e}{\partial c}=2$};
+        %\node[align=center,anchor=south] (clabel) at (c.south) {c=6 };
+
+        \node[draw,ellipse,minimum size=16mm] (d) [below right of=ed]{$\frac{\partial e}{\partial d}=6$};
+        %\node[align=center,anchor=south] (dlabel) at (d.south) {d=2};
+        
+        
+        \node[rectangle,draw] (ca) [below left of=c]{$\frac{\partial c}{\partial a}=1$};
+        \node[rectangle,draw] (cb) [below right of=c]{$\frac{\partial c}{\partial b}=1$};
+        \node[state] (a) [below left of=ca]{$\frac{\partial e}{\partial a}=2+8.64$};
+        %\node[align=center,anchor=north] (alabel) at (a.north) {a\\a=2};
+
+        \node[state] (b) [below right of=cb]{$\frac{\partial e}{\partial b}=2+2.16$};
+        %\node[align=center,anchor=north] (blabel) at (b.north) {b\\b=4};
+        \node[rectangle,draw] (db) [below left of=d]{$\frac{\partial d}{\partial b}=0.36$};
+
+        \node[rectangle,draw] (da) [below left of=cb]{$\frac{\partial d}{\partial a}=1.44$};
+        %\node[rectangle,draw] (tmp)[above of=s]{$tmp$};
+        %\node[state] (v1) [above right of=s] {$v_1$};
+        %\node[state] (v2) [right of=s] {$v_2$};
+        %\node[state] (v3) [below right of=s] {$v_2$};
+        %\node[state] (t) [right of=v2] {$t$};
+        \path[->]  (e) edge (ec) ;
+        \path[->]   (e)edge (ed);
+        \path[->]  (ec) edge (c) ;
+        \path[->]  (c) edge (ca);
+        \path[->]   (c) edge (cb);
+        \path[->]  (ca)edge (a);
+        \path[->] (d) edge (db);
+        \path[->]  (db)edge (b);
+        \path[->]  (ed)edge (d);
+        \path[->]  (cb)edge (b);
+        \path[->]  (da)edge (a);
+        \path[->]  (d)edge (da);
+
+
+        %\path[->] (s) edge node {18} (v1);
+        %\path[->] (s) edge node {1} (v2);
+        %\path[->] (s) edge node {1} (v3);
+        %\path[->] (v2) edge node {2} (v1);
+        %\path[->] (v3) edge node {1} (v2);
+        %\path[->] (v1) edge node {20} (t);
+
+        %\draw[red, dashed] (1, 2) -- (1, -2);
+    \end{tikzpicture}
+
+\end{document}

@@ -1,33 +1,35 @@
 {
    
-    "latex-workshop.latex.tools":[
+  "latex-workshop.latex.tools":[
+   {
+     "name": "pdflatex",
+     "command": "pdflatex.exe",
+     "args": [
+      "-interaction=nonstopmode",
+      "-synctex=1",
+       "-output-directory=../pdf",
+       "-aux-directory=../auxilary",
+       "%DOCFILE%"
+     ]
+   }
+  ],
+  
+  
+   "latex-workshop.latex.recipes":[
+   
      {
-       "name": "pdflatex",
-       "command": "pdflatex",
-       "args": [
-        "-interaction=nonstopmode",
-        "-synctex=1",
-         "-output-directory=../pdf",
-         "%DOCFILE%"
-       ]
-     }
+       "name": "local",
+       "tools": [
+         "pdflatex"
+         ]
+       }
     ],
-    
-    
-     "latex-workshop.latex.recipes":[
-     
-       {
-         "name": "local",
-         "tools": [
-           "pdflatex"
-           ]
-         }
-      ],
-      "latex-workshop.latex.outDir": "../pdf",
-      "terminal.explorerKind": "external",
-      "terminal.integrated.automationShell.windows": "",
-      "workbench.colorTheme": "Visual Studio 2019 Dark",
-    "latex-workshop.synctex.afterBuild.enabled": true,
-    "jupyter.sendSelectionToInteractiveWindow": false,
-    "workbench.editorAssociations": {}
-    }
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "latex-workshop.latex.outDir": "../pdf",
+    "terminal.explorerKind": "external",
+    "terminal.integrated.automationShell.windows": "",
+    "workbench.colorTheme": "Visual Studio 2019 Dark",
+  "latex-workshop.synctex.afterBuild.enabled": true,
+  "jupyter.sendSelectionToInteractiveWindow": false,
+  "workbench.editorAssociations": {}
+  }
