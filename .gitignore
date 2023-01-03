@@ -6,3 +6,5 @@ auxilary
 MNIST
 pdf
 .ipynb_checkpoints/
+logs
+cifar*
