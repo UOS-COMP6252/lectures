@@ -2,7 +2,7 @@
    
   "latex-workshop.latex.tools":[
    {
-     "name": "pdflatex",
+     "name": "pdflatex_W32",
      "command": "pdflatex.exe",
      "args": [
       "-interaction=nonstopmode",
@@ -11,19 +11,35 @@
        "-aux-directory=../auxilary",
        "%DOCFILE%"
      ]
-   }
+   }, 
+   {
+    "name": "pdflatex",
+    "command": "pdflatex",
+    "args": [
+     "-interaction=nonstopmode",
+     "-synctex=1",
+      "-output-directory=../pdf",
+      "%DOCFILE%"
+    ]
+  }
   ],
   
   
    "latex-workshop.latex.recipes":[
    
      {
-       "name": "local",
+       "name": "Linux",
        "tools": [
          "pdflatex"
          ]
-       }
-    ],
+       },
+       {
+        "name": "Windows",
+        "tools": [
+          "pdflatex"
+          ]
+        }
+    ],  
     "terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
     "latex-workshop.latex.outDir": "../pdf",
     "terminal.explorerKind": "external",
