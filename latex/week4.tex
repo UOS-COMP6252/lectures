@@ -47,8 +47,9 @@
     \item Batch normalization is a powerful method that 
     \begin{enumerate}
         \item Allows for better convergence of NN training 
-        \item Adding BN layers to existing NN yield better results
-        \item Training is less sensitive to meta-parameters
+        \item Adding BN layers to existing NN yield better generalization results
+        \item Reduces over fitting
+        \item Training is less sensitive to meta-parameters (learning rate, weights initialization)
     \end{enumerate}
     
 \end{itemize}
@@ -57,35 +58,112 @@
 \end{frame}
 \begin{frame}
     \frametitle{Batch Normalization- How does it work}
-    Given a mini-batch of tensors $x_{ci}$ of dimension (S,C,H,W) where $c$ is the channel index and $i$ collectively refers to all other dimensions. 
-
-    Let $N=S\times H\times W$. Batch normalization computes the mean and variance of the batch (per channel) according to
-    
+    \begin{itemize}
+        \item Given a mini-batch of tensors $x_{ci}$ of dimension (S,C,H,W)
+        \item  where $c$ is the channel index and $i$ collectively refers to all other dimensions. 
+        \item  Let $N=S\times H\times W$.
+        \item Batch normalization computes the mean and variance of the batch (per channel) according to
+    \end{itemize}
         \begin{align*}
         \mu_c&=\frac{1}{N}\sum_{i=1}^N x_{ci}\\
         \sigma^2_c&=\frac{1}{N}\sum_{i=1}^N \left(x_{ci}-\mu_c\right)^2
         \end{align*}
     
     
+    
+    
+\end{frame}
+\begin{frame}
+    \frametitle{Batch Normalization- How does it work}
     The normalized inputs are computed as follows:
     
     \begin{align*}
     \hat{x}_{ci}=\frac{x_{ic}-\mu_c}{\sqrt{\sigma^2_c+\epsilon}}
     \end{align*}
-    
-    
-    Therefore, for each channel, the $\hat{x}_{ci}$ have zero mean and unit variance. The output of the batch normalization layer is given by
+Therefore, for each channel, the $\hat{x}_{ci}$ have zero mean and unit variance. The output of the batch normalization layer is given by
     
     \begin{align*}
     y_{ic}=\gamma \hat{x}_{ic}+\beta
     \end{align*}
     
-    Where $\gamma$ and $\beta$ are **learnable** parameters.
+    Where $\gamma$ and $\beta$ are \textbf{learnable} parameters.
     
 
 \end{frame}
+\begin{frame}
+    \frametitle{Batch normalization - Why does it work?}
+\begin{itemize}
+    \item Considerable ongoing debate
+\item In the original paper of \href{https://arxiv.org/abs/1502.03167}{\beamergotobutton{Ioffe and Szegedy }} it claims that it fixes the internal covariate shift 
+\item meaning the change in the distribution due to the change of the weights during learning 
+\item \href{https://arxiv.org/abs/1805.10694v1}{\beamergotobutton{Kohler et al.}} propose that it separates the change in magnitude from the change of directions.
+\item This can be seen from the fact that the $\hat{x}_{ci}$ are normalized and all of them share the same magniture $\gamma$
+
+\end{itemize}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Example}
+Consider a mini-batch of size two, containing the tensors of size $2\times 2$, $A$ and $B$ with both having a single channel.
 
 
+\begin{columns}
+    
+    \begin{column}{0.5\textwidth}
+        \[
+    A=\begin{bmatrix}
+        1 &2 \\
+        3 & 4
+    \end{bmatrix}    
+    \]
+    \end{column}
+  \begin{column}{0.5\textwidth}
+      \[
+        B=\begin{bmatrix}
+         5 &6 \\
+         7 & 8
+        \end{bmatrix}    
+      \]
+  \end{column}
+
+\end{columns}
+\begin{itemize}
+    \item The mean is 4.5 and (biased) variance is 5.25 therefore the output is
+\end{itemize}
+ 
+\begin{columns}
+    
+    \begin{column}{0.45\textwidth}
+        \[
+    A=\left[\begin{smallmatrix}
+        (1-4.5)/5.25 &(2-4.5)/5.25 \\
+        (3-4.5)/5.25 & (4-4.5)/5.25
+    \end{smallmatrix}    \right]
+    \]
+    \end{column}
+  \begin{column}{0.45\textwidth}
+    \[ 
+        B=\left[\begin{smallmatrix}
+         (5-4.5)/5.25 & (6-4.5)/5.25 \\
+         (7-4.5)/5.25 & (8-4.5)/5.25
+        \end{smallmatrix}\right]    
+      \]
+     
+  \end{column}
+  
+\end{columns}
+\begin{itemize}
+    \item When the input has multiple channels, the same operation is performed for each channel independently
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Dropout}
+
+    
+
+\end{frame}
 \begin{frame}
     \frametitle{Introduction}
     \begin{itemize}
