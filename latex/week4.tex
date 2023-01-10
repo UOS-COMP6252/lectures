@@ -133,6 +133,20 @@
     \end{align*}
 
 \end{frame}
+\begin{frame}
+    \frametitle{What about testing?}
+    \begin{itemize}
+        \item We have seen that training a NN with dropout is   is equivalent to training multiple "smaller" networks.
+        \item The result is an average over all such networks.
+        \item To be consistent we must use the weights learned in the training phase for testing
+        \item This means we have to \textbf{average} over all possible networks, which is infeasible.
+        \item We approximate this averaging by \textbf{not using dropout} during testing
+        \item But the weights obtained in the training phase are multiplied by the probability $p$
+        \item Equivalently the weights are multiplied by $\frac{1}{p}$ during training
+    \end{itemize}
+    
+
+\end{frame}
 
 \begin{frame}
     \frametitle{Batch Normalization}
