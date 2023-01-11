@@ -2,6 +2,13 @@
 *.log
 *.synctex.gz
 *.bib
+*.nav
+*.out
+*.snm
+*.toc
+*.bbl
+*.blg
+*.xml
 auxilary
 MNIST
 pdf

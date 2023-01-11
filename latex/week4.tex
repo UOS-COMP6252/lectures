@@ -1,10 +1,15 @@
 \documentclass{beamer}
 \usepackage[english]{babel}
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{hus-beamer} 
 \usepackage{ifthen}
+\usepackage[bibstyle=authoryear, citestyle=authoryear, maxcitenames=2, maxbibnames=2, backend=bibtex]{biblatex}
+%\usepackage[maxbibnames=2]{biblatex}
+%citestyle=authoryear or numeric or ...
+\addbibresource{ref.bib}
+
 %------ tikZ ------%
 \usepackage{tikz}
 \usetikzlibrary{positioning, arrows}
@@ -25,6 +30,32 @@
 	\end{frame}
 }
 }
+%%%%%%%%
+%\AtBeginBibliography{\footnotesize} % Footnotesize for Bibliography entries
+
+% \setbeamertemplate{bibliography item}{%
+%   \ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+%     or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+%     or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+%     {\setbeamertemplate{bibliography item}[book]}
+%     {\ifentrytype{online}
+%        {\setbeamertemplate{bibliography item}[online]}
+%        {\setbeamertemplate{bibliography item}[article]}}%
+%   \usebeamertemplate{bibliography item}}
+
+% \defbibenvironment{bibliography}
+%   {\list{}
+%      {\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
+%       \setlength{\leftmargin}{\labelwidth}%
+%       \setlength{\labelsep}{\biblabelsep}%
+%       \addtolength{\leftmargin}{\labelsep}%
+%       \setlength{\itemsep}{\bibitemsep}%
+%       \setlength{\parsep}{\bibparsep}}}
+%   {\endlist}
+%   {\item}
+
+
+%\defbibheading{bibliography}[\refname]{}
 
 %------------------%
 
@@ -81,22 +112,63 @@
 
 \begin{frame}
     \frametitle{Overfitting}
+\begin{itemize}
+    \item An example of overfitting is shown below 
+    \item The training accuracy keeps increasing while the validation plateau and even decreases
+\end{itemize}
+\begin{center}
+    \begin{figure}
+     \includegraphics[width=0.7\textwidth]{figs/train-vs-valid-acc.png}
+        
+    \end{figure}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Early stopping}
     \begin{itemize}
-        \item Overfitting is when there is a big discrepancy  between the training accuracy (very high) and the accuracy on the test/validation dataset.  
+        \item In the previous figure, the max accuracy occurs at epoch 14
+        \item If we stop training at epoch 14 or close to it not only we get better accuracy but we save lots of time 
+        \item This is exactly what is called \textbf{early stopping}
+        \item How do we know when to stop training?
+        \item One of the simplest methods is to monitor the \textbf{validation loss}
     \end{itemize}
     
 
 \end{frame}
 \begin{frame}
-    \frametitle{Early stopping }
+    \frametitle{Validation loss vs accuracy}
+\begin{itemize}
+    \item Below is a plot of validation accuracy vs loss.
+    \item Loss was multiplied by 0.5 to show them both on the same plot
+    \item It is clear that accuracy plateaus after the loss starts increasing
+\end{itemize}
+\begin{center}
+    \begin{figure}
+     \includegraphics[width=0.7\textwidth]{figs/valid-loss-vs-accuracy1.png}
+        
+    \end{figure}
+\end{center}
 
+\end{frame}\begin{frame}
+    \frametitle{A zoomed view}
+    \begin{itemize}
+        \item Below is a zoomed view of the previous figure
+        \item A vertical line passing by epoch 14 (where max accuracy occurs) is shown 
+    \end{itemize}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{figs/valid-loss-vs-accuracy.png}
+           
+       \end{figure}
     
 
 \end{frame}
 \begin{frame}
     \frametitle{Dropout}
     \begin{itemize}
-        \item Dropout is a method used to minimize overfitting 
+        \item Dropout is another method used to minimize overfitting 
         \item A dropout layer "drops" certain nodes from the NN as shown in the figure below
     \end{itemize}
     \begin{center}
@@ -113,6 +185,7 @@
         \item Every training pass \textbf{different} nodes are dropped 
         \item A neural network with $n$ nodes that uses dropout, can be seen as a set of $2^n$ different "smaller" networks. Why?
         \item It means that using dropout is equivalent to averaging over an ensemble of Neural networks sharing the same weights
+        \item Since the noise learned by each "smaller" network is random, "averaging" makes them cancel each other.
     \end{itemize}
 
 \end{frame}
@@ -326,7 +399,12 @@ Consider a mini-batch of size two, containing the tensors of size $2\times 2$, $
 \end{frame}
 
 \begin{frame}
-    \frametitle{What about dropout?}
+    \frametitle{References}
+    % \begin{itemize}
+    %     \item \cite{srivastava14}\cite{ioffe15}
+    % \end{itemize}
+\nocite{*}    
+\printbibliography
 \end{frame}
 
 \end{document}
